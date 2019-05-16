@@ -1,9 +1,9 @@
 ## Learning experiment. Not suitable for production use.
 
-* Uses a modified version of hxgenjs that incorporates hxtsdgen.
-* The introduction of hxgenjs provides more flexibility but adds a lot of complexity;
-* Some edge-cases don't work well - i.e hxtsdgen doesn't seem to play well with the module approach from hxgenjs when using third-party libs
-with complex macros, such as tink.
+Almost the same approach as https://github.com/haxe-boilerplate/pwa-ts-haxe-sample but without hxgenjs. Requires classes that will be used from js/ts
+to be @:expose'ed and splits the build.hxml into two in order to generate two haxe js bundles - one for the client and another one for the server (we could
+have kept a single hxml and a single bundle, though, but to keep things more organized and simpler, I found it better to split).
+
 * Current status is: It could be used as an example of TS<>Haxe interoperability or a base for a better boilerplate, but since hxdtsgen doesn't
 work well in all cases, the benefit of this boilerplate is limited.
 
