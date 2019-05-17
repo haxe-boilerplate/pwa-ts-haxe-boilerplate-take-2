@@ -15,6 +15,6 @@ export namespace client {
 export namespace client {
 	class Client {
 		private constructor();
-		static call(): tink.core._Future.FutureObject;
+		static call(): void;
 	}
 }
