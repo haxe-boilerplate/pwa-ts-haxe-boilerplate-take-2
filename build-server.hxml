@@ -1,5 +1,5 @@
 -cp src/hx
-#-lib hxtsdgen
+-lib hxtsdgen
 -lib hxnodejs
 -lib tink_web
 -lib tink_http
