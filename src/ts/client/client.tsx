@@ -18,7 +18,7 @@ console.log(superClientComponent.thisIsNice);
 // but at least you can consume it and refer to the Haxe code for typing information.
 
 client.Client.call().handle(result =>
-  console.log(result)
+  console.log(result.slideshow)
 );
 
 const store = createStore(reducer);

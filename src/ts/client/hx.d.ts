@@ -5,16 +5,52 @@ export class SomeTsClass {
 }
 
 export namespace client {
-	class SuperClientComponent {
-		constructor();
-		thisIsNice: {bar: string, bow: number};
-		saySomething(foo: string): void;
+	export type Foo = {
+		bar: string;
+		bow: number;
 	}
 }
 
 export namespace client {
-	class Client {
+	export class SuperClientComponent {
+		constructor();
+		thisIsNice: client.Foo;
+		saySomething(foo: string): void;
+	}
+}
+
+export namespace tink.core._Callback {
+	export interface LinkObject {
+		cancel(): void;
+	}
+}
+
+export namespace tink.core._Future {
+	export interface FutureObject<T> {
+		map<R>(f: (arg0: T) => R): tink.core._Future.FutureObject<R>;
+		flatMap<R>(f: (arg0: T) => tink.core._Future.FutureObject<R>): tink.core._Future.FutureObject<R>;
+		/**
+		 *  Registers a callback to handle the future result.
+		 *  If the result is already available, the callback will be invoked immediately.
+		 *  @return A `CallbackLink` instance that can be used to cancel the callback, no effect if the callback is already invoked
+		 */
+		handle(callback: (arg0: T) => void): tink.core._Callback.LinkObject;
+		/**
+		 *  Caches the result to ensure the underlying tranform is performed once only.
+		 *  Useful for tranformed futures, such as product of `map` and `flatMap`
+		 *  so that the transformation function will not be invoked for every callback
+		 */
+		gather(): tink.core._Future.FutureObject<T>;
+	}
+}
+
+export type Result = {
+	slideshow: {author: string, date: string, slides: {items?: string[], title: string, type: string}[], title: string};
+}
+
+export namespace client {
+	export class Client {
 		private constructor();
-		static call(): void;
+		static call(): tink.core._Future.FutureObject<Result>;
 	}
 }

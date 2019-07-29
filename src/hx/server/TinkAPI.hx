@@ -10,9 +10,12 @@ import tink.io.Sink;
 import tink.http.Response;
 
 import ApiResult.Result;
+import js.node.http.IncomingMessage;
+import js.node.http.ServerResponse;
 
 // Simple API example, not a proxy
 
+@:expose
 class Root {
     public function new() {}
 
@@ -38,8 +41,8 @@ class Root {
 
 @:expose
 class TinkAPI {
-    static var main = {
+   public static function main(req: js.node.http.IncomingMessage, res: js.node.http.ServerResponse) {
         var router = new Router<Root>(new Root());
-        NodeContainer.toNodeHandler(req -> router.route(Context.ofRequest(req)).recover(OutgoingResponse.reportError));
+        NodeContainer.toNodeHandler(req -> router.route(Context.ofRequest(req)).recover(OutgoingResponse.reportError))(req,res);
     }
 }
