@@ -15,6 +15,9 @@ import js.node.http.ServerResponse;
 
 // Simple API example, not a proxy
 
+@:expose class IncomingMessage extends js.node.http.IncomingMessage {}
+@:expose class ServerResponse extends js.node.http.ServerResponse {}
+
 @:expose
 class Root {
     public function new() {}
@@ -41,7 +44,7 @@ class Root {
 
 @:expose
 class TinkAPI {
-   public static function main(req: js.node.http.IncomingMessage, res: js.node.http.ServerResponse) {
+   public static function main(req: IncomingMessage, res: ServerResponse) {
         var router = new Router<Root>(new Root());
         NodeContainer.toNodeHandler(req -> router.route(Context.ofRequest(req)).recover(OutgoingResponse.reportError))(req,res);
     }
